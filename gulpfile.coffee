@@ -12,44 +12,49 @@ wiredep = require('wiredep').stream
 $ = require('gulp-load-plugins')();
 
 path = 
-  scripts : 'app/scripts/*.coffee'
-  styles  : 'app/styles/*.scss'
+  scripts : 'app/scripts/{,**/}*.{coffee,js}'
+  styles  : 'app/styles/*.{scss,css}'
   images  : 'app/images'
 
 ##dev##
 gulp.task 'scripts',->
-	gulp.src(path.scripts)
+  jsFilter = $.filter '{,**/}*.js'
+  coffeeFilter = $.filter '{,**/}*.coffee'
+  scripts_path = '.tmp/scripts'
+  gulp.src(path.scripts)
+    .pipe jsFilter
+    .pipe $.changed scripts_path
+    .pipe jsFilter.restore()
+    .pipe coffeeFilter
+    .pipe $.changed scripts_path , {extension : '.js'}
     .pipe $.coffee()
-    # .pipe uglify()
-    # .pipe concat 'all.min.js'
-    .pipe gulp.dest '.tmp/scripts'
+    .pipe coffeeFilter.restore()
+    .pipe gulp.dest scripts_path
+    .pipe $.size()
     .pipe connect.reload()
+
 
 gulp.task 'styles',->
+  styles_path = '.tmp/styles'
   gulp.src path.styles
     .pipe sass()
-    # .pipe minify_css()
-    # .pipe concat 'all.min.css'
-    .pipe gulp.dest '.tmp/styles'
-    .pipe connect.reload()
-
-gulp.task 'html',->
-  gulp.src './app/*.html'
-    # .pipe uglify()
-    .pipe gulp.dest 'app'
+    .pipe gulp.dest styles_path
+    .pipe $.size()
     .pipe connect.reload()
 
 gulp.task 'connect',->
   connect.server {
     root : ['app','.tmp'],
     livereload:true,
-    port:8081
+    port:9000
   }
 
 gulp.task 'watch' , ->
   gulp.watch path.scripts  , ['scripts']
   gulp.watch path.styles   , ['styles']
-  gulp.watch './app/*.html', ['html']
+  gulp.watch './app/*.html', ->
+    connect.reload()
+  gulp.watch 'bower.json' , ['wiredep']
 
 gulp.task 'clean' , (cb)->
   rimraf './dist' ,cb
@@ -59,23 +64,31 @@ gulp.task 'wiredep' ,->
     .pipe wiredep()
     .pipe gulp.dest 'app/'
 
-gulp.task 'serve' ,['connect','watch','styles','scripts','html'] ,->
-  require('opn') 'http://localhost:8081/'
+gulp.task 'serve' ,['connect','watch','styles','scripts'] ,->
+  require('opn') 'http://localhost:9000/'
 
 
 ##build##
-gulp.task 'build',['clean','styles','scripts'],->
+
+gulp.task 'fonts',->
+  $.bowerFiles()
+    .pipe $.filter '**/*.{eot,svg,ttf,woff}'
+    .pipe $.flatten()
+    .pipe gulp.dest 'dist/fonts'
+    .pipe $.size()
+
+gulp.task 'build',['clean','styles','scripts','fonts'],->
   jsFilter = $.filter '**/*.js'
-  cssFileter = $.filter '**/*.css'
+  cssFilter = $.filter '**/*.css'
 
   gulp.src 'app/*.html'
     .pipe $.useref.assets {searchPath : '{.tmp,app}'}
     .pipe jsFilter
     .pipe uglify()
     .pipe jsFilter.restore()
-    .pipe cssFileter
+    .pipe cssFilter
     .pipe minify_css()
-    .pipe cssFileter.restore()
+    .pipe cssFilter.restore()
     .pipe $.useref.restore()
     .pipe $.useref()
     .pipe gulp.dest 'dist'
@@ -83,6 +96,12 @@ gulp.task 'build',['clean','styles','scripts'],->
 
   gulp.src ['app/*.*','!app/*.html'],{dot:true}
     .pipe  gulp.dest 'dist'
+
+  gulp.src ['app/images/**/*.*',],{dot:true}
+    .pipe  gulp.dest 'dist/images'
+
+  gulp.src ['app/fonts/*.*',],{dot:true}
+    .pipe  gulp.dest 'dist/fonts'
 
 gulp.task 'default', ['build'],->
   connect.server {
