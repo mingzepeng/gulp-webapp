@@ -1,15 +1,48 @@
-web开发的整个框架，采用gulp进行项目的构建
+web开发框架，采用gulp进行项目的构建，源文件目录在app。
+本框架采用nodejs进行开发，可使用coffee-script和sass，也可以直接使用javascript和css。
 
-使用方式
+特点
+---
 
-进入项目根目录 
-npm install 
-bower install 
-gulp serve 
+- 开发脚本：[coffee-script][1]或者 javascript，[sass][2]或者css
+- 包管理器：采用[bower][3]进行前端包的管理
+- 自动刷新：可检测目录文件的变化，自动刷新页面
+- 自动构建：自动构建项目，支持对js，css文件的合并和压缩
 
-启动项目，即可开始开发。
+环境安装
+---
+1.安装nodejs [进入官网下载][4]
 
-源文件目录在app
+2.使用nodejs的包管理器npm安装gulp，npm会随nodejs一起安装，不必单独下载
+   
+    npm install -g gulp
+    
+3.npm的源时常会被墙，推荐采用淘宝提供的npm国内镜像[淘宝npm镜像][5]
 
-本框架采用coffee-script，sass
+开发流程
+----
+进入项目根目录，执行以下命令（以下所有命令都需要在根目录进行操作）
 
+1.项目依赖加载
+
+    npm install
+    bower install
+    
+2.启动项目
+
+    gulp serve
+    
+3.源码位于app文件夹，进行开发  
+
+
+
+4.开发完毕，构建项目
+    
+    gulp build
+
+
+  [1]: http://coffeescript.org/
+  [2]: http://sass-lang.com/
+  [3]: http://bower.io/
+  [4]: http://nodejs.org/
+  [5]: http://npm.taobao.org/

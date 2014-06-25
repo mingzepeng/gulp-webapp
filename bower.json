@@ -21,6 +21,7 @@
   "dependencies": {
     "jquery": "1.9.0",
     "bootstrap": "~3.1.1",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "undo": "https://github.com/jzaefferer/undo"
   }
 }

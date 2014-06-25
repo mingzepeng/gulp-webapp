@@ -14,11 +14,20 @@
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/test.css">
     <!-- endbuild -->
 
 	</head>
 	<body>
-web development framework
+		<div class="container">
+		<h2>this is a demo</h2>
+			<div id="text" contentEditable="true"></div>
+			<button class="button" id="undo">Undo</button>
+			<button id="redo">redo</button>
+			<button id="save">save<span id="dirty">*</span>
+			</button>
+		</div>
+
 	</body>
 </html>
 
@@ -27,6 +36,7 @@ web development framework
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/undo/undo.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

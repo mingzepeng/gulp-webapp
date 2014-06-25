@@ -12,8 +12,8 @@ wiredep = require('wiredep').stream
 $ = require('gulp-load-plugins')();
 
 path = 
-  scripts : 'app/scripts/{,**/}*.{coffee,js}'
-  styles  : 'app/styles/*.{scss,css}'
+  scripts : 'app/scripts/**/*.{coffee,js}'
+  styles  : 'app/styles/**/*.{scss,css}'
   images  : 'app/images'
 
 ##dev##
@@ -36,10 +36,18 @@ gulp.task 'scripts',->
 
 gulp.task 'styles',->
   styles_path = '.tmp/styles'
+  sassFilter = $.filter '{,**/}*.scss'
   gulp.src path.styles
+    .pipe sassFilter
     .pipe sass()
+    .pipe sassFilter.restore()
     .pipe gulp.dest styles_path
     .pipe $.size()
+    .pipe connect.reload()
+
+gulp.task 'html',->
+  gulp.src 'app/*.html'
+    .pipe gulp.dest 'app/'
     .pipe connect.reload()
 
 gulp.task 'connect',->
@@ -50,11 +58,10 @@ gulp.task 'connect',->
   }
 
 gulp.task 'watch' , ->
-  gulp.watch path.scripts  , ['scripts']
-  gulp.watch path.styles   , ['styles']
-  gulp.watch './app/*.html', ->
-    connect.reload()
+  gulp.watch path.scripts , ['scripts']
+  gulp.watch path.styles  , ['styles']
   gulp.watch 'bower.json' , ['wiredep']
+  gulp.watch 'app/*.html' , ['html']
 
 gulp.task 'clean' , (cb)->
   rimraf './dist' ,cb
@@ -64,9 +71,8 @@ gulp.task 'wiredep' ,->
     .pipe wiredep()
     .pipe gulp.dest 'app/'
 
-gulp.task 'serve' ,['connect','watch','styles','scripts'] ,->
+gulp.task 'serve' ,['connect','watch','styles','scripts','html'] ,->
   require('opn') 'http://localhost:9000/'
-
 
 ##build##
 
