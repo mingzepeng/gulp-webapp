@@ -16,7 +16,7 @@ web开发框架，采用gulp进行项目的构建，源文件目录在app。
 2.使用nodejs的包管理器npm安装gulp，npm会随nodejs一起安装，不必单独下载
    
     npm install -g gulp
-    
+    npm install -g bower
 3.npm的源时常会被墙，推荐采用淘宝提供的npm国内镜像[淘宝npm镜像][5]
 
 开发流程
