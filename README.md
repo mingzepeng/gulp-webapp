@@ -13,7 +13,7 @@ web开发框架，采用gulp进行项目的构建，源文件目录在app。
 ---
 1.安装nodejs [进入官网下载][4]
 
-2.使用nodejs的包管理器npm安装gulp，npm会随nodejs一起安装，不必单独下载
+2.使用nodejs的包管理器npm安装gulp和bower，npm会随nodejs一起安装，不必单独下载
    
     npm install -g gulp
     npm install -g bower
