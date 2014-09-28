@@ -1,12 +1,9 @@
 {
-  "name": "demo",
-  "version": "0.0.0",
-  "description": "a scaffold of front-end by pmz",
-  "main": "index.js",
-  "dependencies": {
-    "gulp": "^3.8.1"
-  },
+  "name": "gulp-webapp",
+  "version": "0.0.1",
+  "description": "a scaffold of front-end",
   "devDependencies": {
+    "gulp": "^3.8.1",
     "coffee-script": "^1.7.1",
     "connect-livereload": "^0.4.0",
     "gulp-bower-files": "^0.2.5",
@@ -27,9 +24,6 @@
     "opn": "^0.1.2",
     "rimraf": "^2.2.8",
     "wiredep": "^1.8.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
