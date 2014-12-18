@@ -1,1 +1,1 @@
-console.log 'this is a web framework by pmz,enjoy it'
+console.log  'this  is a web framework by p mz,enjoy it' 
