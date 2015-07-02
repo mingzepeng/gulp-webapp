@@ -3,15 +3,11 @@
   "version": "0.0.1",
   "description": "a scaffold of front-end",
   "devDependencies": {
-    "browser-sync": "^1.8.0",
+    "browser-sync": "^2.7.12",
     "coffee-script": "^1.8.0",
     "gulp": "^3.8.10",
-    "gulp-changed": "^1.1.0",
-    "gulp-coffee": "^2.2.0",
-    "gulp-jade": "^0.10.0",
     "gulp-load-plugins": "^0.8.0",
     "gulp-plumber": "^0.6.6",
-    "gulp-sass": "^1.2.4",
     "gulp-util": "^3.0.1"
   },
   "repository": {
