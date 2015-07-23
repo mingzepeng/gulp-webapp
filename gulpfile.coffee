@@ -1,11 +1,15 @@
 gulp =    require 'gulp'
+webpack = require 'webpack'
+webpackConfig = require './webpack.config.js'
+
 $ = require('gulp-load-plugins')()
 browserSync = require('browser-sync').create()
 
 src_path = 
   html    : 'app/**/*.html'
-  scripts : 'app/scripts/**/*.js'
-  styles  : 'app/styles/**/*.css'
+  scripts : 'app/**/*.js'
+  scripts_jsx : 'app/**/*.jsx'
+  styles  : 'app/**/*.css'
 
 build_path =
   html    : 'build'
@@ -25,7 +29,12 @@ gulp.task 'serve' , ->
       directory: true
     })
 
+gulp.task 'webpack', ->
+  webpack webpackConfig , (err,stats)->
+    $.util.log err
+
 gulp.task 'dev' , ['serve'] ,->
   gulp.watch src_path.styles , ['css']
+  gulp.watch src_path.scripts_jsx , ['webpack']
   gulp.watch src_path.scripts , ['reload']
   gulp.watch src_path.html   , ['reload']
