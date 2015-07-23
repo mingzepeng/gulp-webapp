@@ -19,10 +19,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~1.9.0",
-    "sassCore": "https://github.com/mingzepeng/sassCore.git"
-  },
-  "devDependencies": {
     "normalize.css": "~3.0.3"
   }
 }

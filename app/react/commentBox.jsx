@@ -1,17 +1,14 @@
-// var React = require('react');
 var React = require('react');
-var marked = require('marked');
 var $ = require('jquery');
-// console.log(react);
 var Comment = React.createClass({
 	render : function(){
-		var rawMarkup =  marked(this.props.children.toString(),{sanitize : true});
+		// var rawMarkup =  marked(this.props.children.toString(),{sanitize : true});
 		return (
 			<div className="comment">
 				<h2 className="commentAuthor">
 					{this.props.author}
 				</h2>
-				<div className="commentText" dangerouslySetInnerHTML={{__html : rawMarkup}} />
+				<div className="commentText" dangerouslySetInnerHTML={{__html : this.props.children.toString()}} />
 			</div>
 		)
 	}
@@ -80,7 +77,7 @@ var CommentBox = React.createClass({
 	},
 	componentDidMount : function(){
 		this.loadData();
-		setInterval(this.loadData,this.props.pollInterval);
+		// setInterval(this.loadData,this.props.pollInterval);
 	},
 	handleCommentSubmit : function  (obj) {
 		this.setState(function (preState,nextState) {
