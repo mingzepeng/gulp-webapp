@@ -33,7 +33,7 @@ gulp.task 'webpack', ->
   webpack webpackConfig , (err,stats)->
     $.util.log err
 
-gulp.task 'dev' , ['serve'] ,->
+gulp.task 'dev' , ['webpack','serve'] ,->
   gulp.watch src_path.styles , ['css']
   gulp.watch src_path.scripts_jsx , ['webpack']
   gulp.watch src_path.scripts , ['reload']

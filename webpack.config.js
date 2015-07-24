@@ -1,13 +1,20 @@
 var webpack = require('webpack');
-var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-	plugins: [commonsPlugin, new ExtractTextPlugin("[name].css")],
-	context: __dirname + "/app/react",
-	entry: "./main.jsx",
+	plugins: [
+		new webpack.optimize.CommonsChunkPlugin('common','common.js'), 
+		new ExtractTextPlugin("[name].bundle.css"),
+		new webpack.BannerPlugin("this is from banner"),
+		new webpack.optimize.UglifyJsPlugin({sourceMap : true})
+	],
+	context: __dirname + "/app/example",
+	entry: {
+		main : ["./main.jsx","./main1.jsx"],
+		common : ['jquery','react']
+	},
 	output: {
-		path: __dirname + "/app/react",
+		path: __dirname + "/app/example/bundle",
 		filename: "[name].bundle.js"
 	},
 	module: {
@@ -20,7 +27,7 @@ module.exports = {
 		    loader: "style!css!sass"
       	},{ 
       		test: /\.css$/, 
-      		loader: "style!css" 
+      		loader: ExtractTextPlugin.extract("style-loader", "css-loader") 
       	}]
 	}
 };
