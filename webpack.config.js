@@ -3,19 +3,20 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
 	plugins: [
-		new webpack.optimize.CommonsChunkPlugin('common','common.js'), 
+		new webpack.optimize.CommonsChunkPlugin('common',"common.js"), 
 		new ExtractTextPlugin("[name].bundle.css"),
-		new webpack.BannerPlugin("this is from banner"),
-		new webpack.optimize.UglifyJsPlugin({sourceMap : true})
+		// new webpack.BannerPlugin("this is from banner")
+		// new webpack.optimize.UglifyJsPlugin({sourceMap : true})
 	],
 	context: __dirname + "/app/example",
 	entry: {
-		main : ["./main.jsx","./main1.jsx"],
+		main : "./main.jsx",
 		common : ['jquery','react']
 	},
 	output: {
 		path: __dirname + "/app/example/bundle",
-		filename: "[name].bundle.js"
+		filename: "[name].bundle.js",
+		chunkFilename : "[id].js"
 	},
 	module: {
 		loaders: [{
