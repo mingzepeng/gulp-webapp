@@ -7,6 +7,9 @@ webpackJsonp([1],{
 
 	__webpack_require__(158);
 	__webpack_require__(162);
+	var React = __webpack_require__(2);
+	// var $ = require('jquery')
+	console.log(React);
 
 /***/ },
 
