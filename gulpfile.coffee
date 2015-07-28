@@ -7,9 +7,10 @@ browserSync = require('browser-sync').create()
 
 src_path = 
   html    : 'app/**/*.html'
-  scripts : 'app/**/*.js'
-  scripts_jsx : 'app/**/*.jsx'
-  styles  : 'app/**/*.css'
+  scripts : 'app/scripts/**/*.jsx'
+  styles  : 'app/styles/**/*.css'
+  bundles_css  : 'app/bundles/**/*.css'
+  bundles_js  : 'app/bundles/**/*.js'
 
 build_path =
   html    : 'build'
@@ -34,7 +35,8 @@ gulp.task 'webpack', ->
     $.util.log err
 
 gulp.task 'dev' , ['webpack','serve'] ,->
-  gulp.watch src_path.styles , ['css']
-  gulp.watch src_path.scripts_jsx , ['webpack']
-  gulp.watch src_path.scripts , ['reload']
+  gulp.watch src_path.styles  , ['webpack']
+  gulp.watch src_path.scripts , ['webpack']
   gulp.watch src_path.html   , ['reload']
+  gulp.watch src_path.bundles_js , ['reload']
+  gulp.watch src_path.bundles_css , ['css']
