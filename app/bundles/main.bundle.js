@@ -6,10 +6,42 @@ webpackJsonp([1],{
 	'use strict';
 
 	__webpack_require__(158);
-	__webpack_require__(162);
+	__webpack_require__(159);
+
 	var React = __webpack_require__(2);
 	// var $ = require('jquery')
-	console.log(React);
+
+	var HelloWorld = React.createClass({
+		displayName: 'HelloWorld',
+
+		render: function render() {
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'div',
+					{ className: 'header' },
+					React.createElement(
+						'h1',
+						null,
+						'gulp-webapp'
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'container' },
+					React.createElement(
+						'p',
+						null,
+						'hello world'
+					)
+				),
+				React.createElement('div', { className: 'footer' })
+			);
+		}
+	});
+
+	React.render(React.createElement(HelloWorld, null), document.body);
 
 /***/ },
 
@@ -20,7 +52,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 162:
+/***/ 159:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

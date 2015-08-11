@@ -7,13 +7,15 @@ var React = require('react')
 var HelloWorld = React.createClass({
 	render : function () {
 		return (
-			<div class="header">
-				<h1>gulp-webapp</h1>
+			<div>
+				<div className="header">
+					<h1>gulp-webapp</h1>
+				</div>
+				<div className="container">
+					<p>hello world</p>
+	   			</div>
+				<div className="footer"></div>
 			</div>
-			<div class="container">
-				<p>hello world</p>
-   			</div>
-			<div class="footer"></div>
 		);
 	}
 })
