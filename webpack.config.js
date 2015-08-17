@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
+var path = require('path')
 module.exports = {
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('common',"common.bundle.js"), 
@@ -8,14 +8,15 @@ module.exports = {
 		// new webpack.BannerPlugin("this is from banner")
 		// new webpack.optimize.UglifyJsPlugin({sourceMap : true})
 	],
-	context: __dirname + "/app",
+	context: path.join(__dirname,'app'),
 	entry: {
 		main : "./scripts/main.jsx",
 		common : ['jquery','react']
 	},
 	output: {
-		path: __dirname + "/app/bundles",
-		filename: "[name].bundle.js"
+		path: path.join(__dirname,'app/bundles'),
+		filename: "[name].bundle.js",
+		sourceMapFilename : "[file].map"
 	},
 	module: {
 		loaders: [{
@@ -29,5 +30,8 @@ module.exports = {
       		test: /\.css$/, 
       		loader: ExtractTextPlugin.extract("style-loader", "css-loader") 
       	}]
-	}
+	},
+	devtool : "eval"
+
+
 };
